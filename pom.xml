@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.wiktorek140</groupId>
 	<artifactId>dzialka</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>Dzialki</name>
 	<dependencies>
 
