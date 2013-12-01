@@ -125,18 +125,18 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 		}
 		else if (args[0].equalsIgnoreCase("zapros") == true){
 			if(sender.hasPermission("dzialka.zarzadzanie")){
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldguard.region.remove.*");
+				//Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldguard.region.remove.*");
 				Bukkit.getServer().dispatchCommand(sender, "rg addmember "+sender.getName()+" "+args[1]);
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldguard.region.remove.*");
+				//Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldguard.region.remove.*");
 				return true;
 			}
 			else sender.sendMessage("Nie masz uprawnien aby zarządać dzialką.");return false;		
 		}
 		else if (args[0].equalsIgnoreCase("wypros") == true){
 			if(sender.hasPermission("dzialka.zarzadzanie")){
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldguard.region.remove.*");
+				//Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldguard.region.remove.*");
 				Bukkit.getServer().dispatchCommand(sender, "rg removemember "+sender.getName()+" "+args[1]);
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldguard.region.remove.*");
+				//Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldguard.region.remove.*");
 				return true;
 			}
 			else sender.sendMessage("Nie masz uprawnien aby zrządać działką.");return false;			
