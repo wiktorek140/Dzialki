@@ -1,0 +1,41 @@
+
+name: Dzialki
+
+description: Dzialki do MC 1.6.4
+
+author: wiktorek140
+website: 
+
+main: org.wiktorek140.Dzialka
+
+version: ${project.version}
+
+commands:
+    dzialka:
+        description: Tworzenie dzialek
+        permission: dzialka.admin
+        usage: /dzialka help
+
+soft-depend: [SQLibrary, Vault, WorldGuard, Factions]
+
+permissions:
+    dzialka.*:
+        default: false
+        children:
+            dzialka.tworzenie: true
+            dzialka.tworzenieV: true
+            dzialka.tworzenieS: true
+            dzialka.zarzadzanie: true
+    dzialka.tworzenie:
+        default: true
+        description: Allows to use effects as commands, e.g. '!set health to 10'
+    dzialka.tworzenieV:
+        default: op
+        description: Allows to use administrative commands and to recieve notifications of new versions.
+    dzialka.tworzenieS:
+        default: op
+        description: Pozwala tworzyc dzialki supervipom
+    dzialka.zarzadzanie:
+        default: true
+        description: Usuwanie dzialek
+
