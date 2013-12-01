@@ -19,7 +19,6 @@ public void onEnable(){
 
 private WorldGuardPlugin getWorldGuard() {
     Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
- 
     // WorldGuard may not be loaded
     if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
         return null; // Maybe you want throw an exception instead
@@ -46,6 +45,7 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 	    sender.sendMessage("Komenda §c/dzialka usun §fusuwa dzialke. ");
 		sender.sendMessage("Komenda §c/dzialka zapros nick §fdodaje osobe do dzialki. ");
 		sender.sendMessage("Komenda §c/dzialka wypros nick §fusuwa osobe z dzialki. ");
+		return true;
 		}
 		else if (args[0].equalsIgnoreCase("stworz") == true) {
 			//TODO sprawdzenie bloków
@@ -53,7 +53,8 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 			//sender.sendMessage("Tak");
 						
 			
-			if (sender.hasPermission("dzialka.tworzenie") && checkChunk((Player) sender, 1)){
+			if (sender.hasPermission("dzialka.tworzenie")){
+				if (checkChunk((Player) sender, 1)){
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldedit.selection.chunk");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldedit.selection.expand");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldguard.region.define");
@@ -63,7 +64,9 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldedit.selection.expand");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldedit.selection.expand");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldedit.selection.expand");
-			} else sender.sendMessage("Nie masz uprawnien aby stworzyc dzialke.");
+				return true;
+				}else {sender.sendMessage("W tym miejscu jest już inna działka.");return false;}
+			} else sender.sendMessage("Nie masz uprawnien aby stworzyc dzialke."); return false;
 		}
 		else if (args[0].equalsIgnoreCase("stworzVIP") == true){
 			//TODO sprawdzenie bloków
@@ -72,7 +75,8 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 			
 			
 			
-			if (sender.hasPermission("dzialka.tworzenie") && checkChunk((Player) sender, 17)){
+			if (sender.hasPermission("dzialka.tworzenieV") ){
+				if (checkChunk((Player) sender, 17)){
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldedit.selection.chunk");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldedit.selection.expand");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldguard.region.define");
@@ -84,14 +88,17 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldedit.selection.expand");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldedit.selection.expand");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldedit.selection.expand");
-			} else sender.sendMessage("Nie masz uprawnien aby stworzyc dzialke.");
+				return true;
+				}else {sender.sendMessage("W tym miejscu jest już inna działka.");return false;}
+			} else sender.sendMessage("Nie masz uprawnien aby stworzyc dzialke.");return false;
 		}
 		else if (args[0].equalsIgnoreCase("stworzSVIP") == true){
 			//TODO sprawdzenie bloków
 			
 			//sender.sendMessage("Tak");
 			
-			if (sender.hasPermission("dzialka.tworzenie")&& checkChunk((Player) sender,46)){
+			if (sender.hasPermission("dzialka.tworzenieS")){
+				if (checkChunk((Player) sender, 46)){
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldedit.selection.chunk");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldedit.selection.expand");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" add worldguard.region.define");
@@ -104,6 +111,7 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldedit.selection.expand");
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldedit.selection.expand");
 				return true;
+				}else {sender.sendMessage("W tym miejscu jest już inna działka.");return false;}
 			} else sender.sendMessage("Nie masz uprawnien aby stworzyc dzialke.");return false;
 		}
 		else if (args[0].equalsIgnoreCase("usun") == true){
@@ -113,7 +121,7 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldguard.region.remove.*");
 				return true;
 			}
-			else sender.sendMessage("Nie masz uprawnien aby stworzyc dzialke.");return false;
+			else sender.sendMessage("Nie masz uprawnien aby zarządzać dzialką.");return false;
 		}
 		else if (args[0].equalsIgnoreCase("zapros") == true){
 			if(sender.hasPermission("dzialka.zarzadzanie")){
@@ -122,7 +130,7 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldguard.region.remove.*");
 				return true;
 			}
-			else sender.sendMessage("Nie masz uprawnien aby stworzyc dzialke.");return false;		
+			else sender.sendMessage("Nie masz uprawnien aby zarządać dzialką.");return false;		
 		}
 		else if (args[0].equalsIgnoreCase("wypros") == true){
 			if(sender.hasPermission("dzialka.zarzadzanie")){
@@ -131,11 +139,11 @@ if ((sender instanceof Player) && (name.equalsIgnoreCase("world") == true)){
 				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "pex user "+sender.getName()+" remove worldguard.region.remove.*");
 				return true;
 			}
-			else sender.sendMessage("Nie masz uprawnien aby stworzyc dzialke.");return false;			
+			else sender.sendMessage("Nie masz uprawnien aby zrządać działką.");return false;			
 		}
 	}		
 }
-else sender.sendMessage("W tym swiecie nie mozna tworzyc dzialek."); return false;
+else sender.sendMessage("W tym swiecie nie mozna tworzyc działek."); return false;
 }
 
 public boolean checkChunk(Player player, int length){
