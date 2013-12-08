@@ -20,12 +20,12 @@ soft-depend: [SQLibrary, Vault, WorldGuard, Factions]
 
 permissions:
     dzialka.*:
-        default: false
+        default: true
         children:
-            dzialka.tworzenie: false
+            dzialka.tworzenie: true
             dzialka.tworzenieV: false
             dzialka.tworzenieS: false
-            dzialka.zarzadzanie: false
+            dzialka.zarzadzanie: true
     dzialka.zarzadzanie:
         default: false
         description: Usuwanie dzialek
